@@ -11,18 +11,21 @@
         <h1>正規表現置換ツール</h1>
     </header>
     <main>
-        <p><label id="before-text-label" class="" for="before-text">対象テキストを貼り付けてください</label></p>
-        <p><textarea id="before-text" name="before-text" rows="20" cols="120" placeholder="（例） google"></textarea></p>
-        <p><label id="search-text-label" class="" for="search-text">検索用の正規表現を入力してください</label></p>
-        <p><textarea id="search-text" name="search-text" rows="1" cols="120" placeholder="（例） g.*gle"></textarea></p>
-        <p><label id="replace-text-label" class="" for="replace-text">置換後の文字を入力してください</label></p>
-        <p><textarea id="replace-text" name="replace-text" rows="1" cols="120" placeholder="（例） yahoo"></textarea></p>
+        <p><label for="before-text">対象テキスト</label></p>
+        <p><textarea id="before-text" name="before-text" rows="15" cols="50" placeholder="ここに貼り付けてください&#13;&#10;（例） google"></textarea></p>
+        <p><label for="search-text">検索語（正規表現）</label></p>
+        <p><textarea id="search-text" name="search-text" rows="1" cols="50" placeholder="（例） g.*gle"></textarea></p>
+        <p><label for="replace-text">置換後の文字</label></p>
+        <p><textarea id="replace-text" name="replace-text" rows="1" cols="50" placeholder="（例） yahoo"></textarea></p>
         <p>
-            <button id="exec-replace-button" class="" type="button">置換実行</button>
-            <button id="result-clear-button" class="" type="button">結果クリア</button>
+            <button id="exec-search-button" type="button">検索</button>
+            <button id="exec-replace-button" type="button">置換</button>
+            <button id="result-clear-button" type="button">結果クリア</button>
         </p>
-        <p><label id="after-text-label" class="" for="after-text">対象テキストを貼り付けてください</label></p>
-        <p><textarea id="after-text" name="after-text" rows="20" cols="120" placeholder="ここに置換後の結果が表示されます"></textarea></p>
+        <p><label>検索結果</label></p>
+        <p><span id="search-results"></span></p>
+        <p><label for="replace-results">置換結果</label></p>
+        <p><textarea id="replace-results" name="replace-results" rows="15" cols="50" placeholder="置換ボタンを押すとここに置換後の結果が表示されます"></textarea></p>
     </main>
 </body>
 </html>
