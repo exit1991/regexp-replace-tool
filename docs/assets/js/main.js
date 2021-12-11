@@ -1,8 +1,5 @@
 'use strict'
 
-// 改行コードの指定
-const lineBrStr = '\n';
-
 // 要素
 const elem = {
      'before-text':         document.querySelector('#before-text')
@@ -23,11 +20,11 @@ elem['exec-replace-button'].addEventListener('click', () => {
     const searchStr = elem['search-text'].value;
     const replaceStr = elem['replace-text'].value;
     
-    const lineBrRegExp = new RegExp(lineBrStr);
-    const targetBeforeArr = targetBeforeStr.split(lineBrRegExp);
-    const searchRegExp = new RegExp(searchStr, 'g');
-    const targetAfterArr = [];
-    targetBeforeArr.forEach(oneLine => targetAfterArr.push(oneLine.replace(searchRegExp, replaceStr)));
-    const targetAfterStr = targetAfterArr.join(lineBrStr);
+    // RegExp 第2引数  g : 同じ行で2回以上ヒットさせる
+    //                 m : 複数行で、それぞれの行に対してヒットさせる
+    const searchRegExp = new RegExp(searchStr, 'gm');
+    const targetAfterStr = targetBeforeStr.replace(searchRegExp, replaceStr);
+    
+    // 置換後のセット
     elem['after-text'].value = targetAfterStr;
 });
