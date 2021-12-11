@@ -1,19 +1,16 @@
 'use strict'
 
-// 要素
+// 要素の取得
 const elem = {
      'before-text':         document.querySelector('#before-text')
     ,'search-text':         document.querySelector('#search-text')
     ,'replace-text':        document.querySelector('#replace-text')
     ,'after-text':          document.querySelector('#after-text')
     ,'exec-replace-button': document.querySelector('#exec-replace-button')
-    ,'before-text-label':   document.querySelector('#before-text-label')
-    ,'search-text-label':   document.querySelector('#search-text-label')
-    ,'replace-text-label':  document.querySelector('#replace-text-label')
-    ,'after-text-label':    document.querySelector('#after-text-label')
+    ,'result-clear-button': document.querySelector('#result-clear-button')
 }
 
-// クリックした際の処理
+// 実行ボタンがクリックした際の処理
 elem['exec-replace-button'].addEventListener('click', () => {
     // 入力値の取得
     const targetBeforeStr = elem['before-text'].value;
@@ -27,4 +24,9 @@ elem['exec-replace-button'].addEventListener('click', () => {
     
     // 置換後のセット
     elem['after-text'].value = targetAfterStr;
+});
+
+// 結果クリアボタンがクリックした際の処理
+elem['result-clear-button'].addEventListener('click', () => {
+    elem['after-text'].value = '';
 });
