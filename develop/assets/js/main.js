@@ -14,20 +14,29 @@ const elem = {
 
 // 検索ボタンがクリックした際の処理
 elem['exec-search-button'].addEventListener('click', () => {
-    // 入力値の取得
-    // 検索語を () で囲みキャプチャ可能にし、置換後 mark要素 で囲む
-    const targetBeforeStr = elem['before-text'].value;
-    const searchStr = '(' + elem['search-text'].value + ')';
-    const replaceStr = '<mark>$1</mark>';
+    // 二段階置換用ダミー文字
+    const hitStartStr = '###＞###';
+    const hitEndStr = '###＜###';
     
-    // RegExp 第2引数  g : 同じ行で2回以上ヒットさせる
-    //                 m : 複数行で、それぞれの行に対してヒットさせる
-    const searchRegExp = new RegExp(searchStr, 'gm');
-    const targetAfterStr = targetBeforeStr.replace(searchRegExp, replaceStr);
+    // ハイライトのための置換1
+    // 検索結果の前後を ダミー文字 で囲む
+    let targetBeforeStr = elem['before-text'].value;
+    let searchStr = '(' + elem['search-text'].value + ')';
+    let replaceStr = hitStartStr + '$1' + hitEndStr;
     
-    // 検索後のセット
-    // 改行コードは brタグ に置換
-    elem['search-results'].innerHTML = targetAfterStr.replace(/\r?\n/g,'<br>');
+    // g:同じ行で2回以上ヒット m:複数行の使用を許可
+    let searchRegExp = new RegExp(searchStr, 'gm');
+    let targetAfterStr = targetBeforeStr.replace(searchRegExp, replaceStr);
+    elem['search-results'].innerText = targetAfterStr;
+    
+    // ハイライトのための置換2
+    // ダミー文字を mark要素 に置き換える
+    targetBeforeStr = elem['search-results'].innerHTML;
+    searchStr = hitStartStr + '(.*?)' + hitEndStr;
+    replaceStr = '<mark>$1</mark>';
+    searchRegExp = new RegExp(searchStr, 'gm');
+    targetAfterStr = targetBeforeStr.replace(searchRegExp, replaceStr);
+    elem['search-results'].innerHTML = targetAfterStr;
 });
 
 // 実行ボタンがクリックした際の処理
@@ -37,8 +46,7 @@ elem['exec-replace-button'].addEventListener('click', () => {
     const searchStr = elem['search-text'].value;
     const replaceStr = elem['replace-text'].value;
     
-    // RegExp 第2引数  g : 同じ行で2回以上ヒットさせる
-    //                 m : 複数行で、それぞれの行に対してヒットさせる
+    // g:同じ行で2回以上ヒット m:複数行の使用を許可
     const searchRegExp = new RegExp(searchStr, 'gm');
     const targetAfterStr = targetBeforeStr.replace(searchRegExp, replaceStr);
     
